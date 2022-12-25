@@ -2,7 +2,10 @@ package com.ritiksharmarj.dailynews
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ritiksharmarj.dailynews.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -20,11 +23,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         getNews()
+
+        // Day/Night mode
+        binding.ivNightMode.setOnClickListener {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            binding.ivNightMode.visibility = View.GONE
+            binding.ivLightMode.visibility = View.VISIBLE
+        }
+        binding.ivLightMode.setOnClickListener {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            binding.ivNightMode.visibility = View.VISIBLE
+            binding.ivLightMode.visibility = View.GONE
+        }
+
+        // Toast for avatar img
+        binding.avatar.setOnClickListener {
+            Toast.makeText(this, "Metaverse in progress", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun getNews() {
         val news = NewsService.newsInstance.getHeadlines("in", 1)
-        news.enqueue(object : Callback<News>{
+        news.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 val news = response.body()
                 if (news != null) {
@@ -35,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<News>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d("NEWS", "Error in fetching news", t)
             }
         })
     }

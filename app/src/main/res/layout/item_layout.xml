@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:background="#F1F1F1"
+    android:background="@color/card_background"
     app:cardCornerRadius="16dp">
 
     <LinearLayout
@@ -28,21 +28,25 @@
 
             <TextView
                 android:id="@+id/tvNewsTitle"
-                style="@style/TextAppearance.AppCompat.Headline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:ems="10"
+                android:fontFamily="@font/roboto_medium"
                 android:maxLines="3"
-                android:text="News Title" />
+                android:text="News Title"
+                android:textColor="@color/primary_text"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tvNewsDescription"
-                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
                 android:maxLines="3"
-                android:text="News Description" />
+                android:text="News Description"
+                android:textColor="@color/secondary_text"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
