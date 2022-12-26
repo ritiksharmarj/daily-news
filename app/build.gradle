@@ -58,4 +58,7 @@ dependencies {
     // Card view
     implementation 'androidx.cardview:cardview:1.0.0'
 
+    // Google AdMob
+    implementation 'com.google.android.gms:play-services-ads:21.4.0'
+
 }

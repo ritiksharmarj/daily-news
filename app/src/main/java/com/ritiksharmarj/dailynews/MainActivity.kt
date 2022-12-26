@@ -2,12 +2,14 @@ package com.ritiksharmarj.dailynews
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.AbsListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.ritiksharmarj.dailynews.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,6 +33,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Google AdMob
+        MobileAds.initialize(this) {}
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+
+        // RecyclerView implementation
         adapter = NewsAdapter(this, articles)
         binding.newsList.adapter = adapter
         layoutManager = LinearLayoutManager(this)
@@ -69,15 +78,12 @@ class MainActivity : AppCompatActivity() {
         getNews()
 
         // Day/Night mode
-        binding.ivNightMode.setOnClickListener {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            binding.ivNightMode.visibility = View.GONE
-            binding.ivLightMode.visibility = View.VISIBLE
-        }
-        binding.ivLightMode.setOnClickListener {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            binding.ivNightMode.visibility = View.VISIBLE
-            binding.ivLightMode.visibility = View.GONE
+        binding.tbDayNight.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         }
 
         // Toast for avatar img
