@@ -14,7 +14,11 @@ To try out this app, use the latest stable version of [Android Studio](https://d
 - RecyclerView Endless Scrolling
 - [Retrofit](https://square.github.io/retrofit/)
 - [CardView](https://developer.android.com/develop/ui/views/layout/cardview)
+<<<<<<< HEAD
 - [Glide](https://github.com/bumptech/glide) for Image Loading
+=======
+- [Glide](https://github.com/bumptech/glide)
+>>>>>>> 1d9e5f4 (README.md)
 - Day-Night Mode
 - WebView for News Articles
 - [Google AdMob](https://developers.google.com/admob/android/quick-start)
